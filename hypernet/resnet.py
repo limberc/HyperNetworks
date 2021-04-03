@@ -52,7 +52,6 @@ class HyperConv2d(nn.Module):
         self.padding_mode = padding_mode
         self.z_dim = z_dim
         self.base = base
-        assert (hyper_module is not None), "no hyper_module"
         self.hyper_module = hyper_module
         self.layer_embed = nn.ParameterList()
         for i in range(self.out_channels // self.base):
@@ -209,7 +208,7 @@ def resnet34(num_classes=100, base=64, z_dim=512):
 
 
 def resnet50(num_classes=100, base=64, z_dim=512):
-    return HyperResNet(HyperBasicBlock, [2, 2, 2, 2], num_classes, base=base, z_dim=z_dim)
+    return HyperResNet(HyperBottleneck, [2, 2, 2, 2], num_classes, base=base, z_dim=z_dim)
 
 
 if __name__ == '__main__':
